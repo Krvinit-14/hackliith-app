@@ -1,7 +1,7 @@
 /* API client for the backend (not loaded yet).
    Next step: replace the in-memory logic in actions.js with these calls,
    then add <script src="js/api.js"></script> before actions.js in index.html. */
-const API={base:'/api',token:null,
+const API={base:'https://hackliith-app.onrender.com',token:null,
 async call(path,o={}){const r=await fetch(this.base+path,{method:o.method||'GET',headers:{'Content-Type':'application/json',...(this.token?{Authorization:'Bearer '+this.token}:{})},body:o.body?JSON.stringify(o.body):undefined});const d=await r.json();if(!r.ok)throw new Error(d.error||'Request failed');return d},
 lookupCollege:u=>API.call('/colleges/lookup?url='+encodeURIComponent(u)),
 register:b=>API.call('/auth/register',{method:'POST',body:b}),
